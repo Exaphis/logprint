@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viewing collection {{ collection.name }}</title>
+</head>
+<body>
+{% if logs|length > 0 %}
+    <ul>
+    {% for log in logs %}
+        <li>
+            <a>IP address: {{ log.ip_addr }}</a>
+            <a>Contents: {{ log.log_text }}</a>
+            <a>Time: {{ log.received_time }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Collection {{ collection.name }} contains no logs.</p>
+{% endif %}
+</body>
+</html>

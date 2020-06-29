@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Log Collections</title>
+</head>
+<body>
+{% if collections_list %}
+    <ul>
+    {% for collection in collections_list %}
+        <li>
+            <a href="{% url 'logs:view-collection' collection.unique_id %}">
+                {{ collection.name }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+</body>
+</html>
