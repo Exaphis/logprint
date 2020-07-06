@@ -9,9 +9,11 @@
     <ul>
     {% for log in logs %}
         <li>
-            <a>IP address: {{ log.ip_addr }}</a>
-            <a>Contents: {{ log.log_text }}</a>
-            <a>Time: {{ log.received_time }}</a>
+            <a>{{ log.received_time }}</a>
+            <ul>
+                <li>IP address: {{ log.ip_addr }}</li>
+                <li>Contents: {{ log.log_text }}</li>
+            </ul>
         </li>
     {% endfor %}
     </ul>
