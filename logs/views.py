@@ -1,4 +1,3 @@
-from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
 from .models import LogCollection, Log
@@ -13,8 +12,17 @@ class IndexView(generic.ListView):
         return LogCollection.objects.order_by('create_time')
 
 
-def view_collection(request, collection_unique_id):
-    collection = get_object_or_404(LogCollection, unique_id=collection_unique_id)
-    logs = Log.objects.filter(collection=collection)
-    context = {'collection': collection, 'logs': logs}
-    return render(request, 'logs/view_collection.html', context)
+class CollectionView(generic.DetailView):
+    template_name = 'logs/view_collection.html'
+    context_object_name = 'collection'
+    model = LogCollection
+
+    def get_object(self, queryset=None):
+        if queryset is not None:
+            return queryset.get(unique_id=self.kwargs['collection_unique_id'])
+        return LogCollection.objects.get(unique_id=self.kwargs['collection_unique_id'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logs'] = Log.objects.filter(collection=kwargs['object'])
+        return context

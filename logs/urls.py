@@ -1,9 +1,9 @@
 from django.urls import path
 
-from . import views
+from .views import IndexView, CollectionView
 
 app_name = 'logs'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('<uuid:collection_unique_id>/', views.view_collection, name='view-collection')
+    path('', IndexView.as_view(), name='index'),
+    path('<uuid:collection_unique_id>/', CollectionView.as_view(), name='view-collection')
 ]
