@@ -9,12 +9,14 @@
     <ul>
     {% for collection in collections_list %}
         <li>
-            <a href="{% url 'logs:view-collection' collection.unique_id %}">
+            <a href="{% url 'logs:detail' collection.unique_id %}">
                 {{ collection.name }}
             </a>
         </li>
     {% endfor %}
     </ul>
+{% else %}
+    <p>No collections found.</p>
 {% endif %}
 </body>
 </html>
