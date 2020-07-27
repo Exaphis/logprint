@@ -1,12 +1,12 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth import get_user_model
 import uuid
 
 
 # Create your models here.
 class LogCollection(models.Model):
     unique_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     create_time = models.DateTimeField(auto_now=True)
 

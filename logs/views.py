@@ -1,11 +1,29 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
 from ipware import get_client_ip
+from rest_framework import viewsets
+from .serializers import UserSerializer, LogCollectionSerializer, LogSerializer
 
 from .models import LogCollection, Log
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class LogCollectionViewSet(viewsets.ModelViewSet):
+    queryset = LogCollection.objects.all()
+    serializer_class = LogCollectionSerializer
+
+
+class LogViewSet(viewsets.ModelViewSet):
+    queryset = Log.objects.all()
+    serializer_class = LogSerializer
 
 
 class IndexView(generic.ListView):
